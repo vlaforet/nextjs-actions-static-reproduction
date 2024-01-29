@@ -1,4 +1,19 @@
-/** Add your relevant code here for the issue to reproduce */
+import { redirect } from 'next/navigation';
+
+// Forcing dynamic rendering solves the issue
+// export const dynamic = 'force-dynamic';
+
 export default function Home() {
-  return null;
+  const action = async (formData: FormData) => {
+    'use server';
+
+    redirect('/not-found');
+  };
+
+  return (
+    <form action={action}>
+      <input name="name" type="text" />
+      <button type="submit">Submit</button>
+    </form>
+  );
 }
